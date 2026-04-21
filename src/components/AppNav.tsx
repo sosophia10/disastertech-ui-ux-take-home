@@ -1,50 +1,38 @@
 import { NavLink } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
-// Intentionally ugly shared nav: clashing colors, cramped spacing,
-// no responsive handling, weird hover states. Tailwind utilities only.
+const LINKS = [
+  { to: "/", label: "Home", end: true },
+  { to: "/records", label: "Records", end: false },
+  { to: "/profile", label: "Profile", end: false },
+] as const;
+
 export default function AppNav() {
   return (
-    <nav className="flex gap-1 bg-lime-300 px-2 py-1 border-b-4 border-fuchsia-600 text-xs">
-      <NavLink
-        to="/"
-        end
-        className={({ isActive }) =>
-          [
-            "px-1 py-0.5 font-black uppercase tracking-widest",
-            "text-red-700 bg-yellow-200 border border-black",
-            "hover:bg-cyan-400 hover:text-purple-900 hover:italic",
-            isActive ? "underline decoration-wavy decoration-pink-600" : "",
-          ].join(" ")
-        }
-      >
-        Home
-      </NavLink>
-      <NavLink
-        to="/records"
-        className={({ isActive }) =>
-          [
-            "px-1 py-0.5 font-mono",
-            "text-blue-900 bg-orange-300",
-            "hover:bg-green-500 hover:text-red-900 hover:line-through",
-            isActive ? "outline-4 outline-dotted outline-red-600" : "",
-          ].join(" ")
-        }
-      >
-        records
-      </NavLink>
-      <NavLink
-        to="/profile"
-        className={({ isActive }) =>
-          [
-            "px-1 py-0.5",
-            "text-white bg-purple-700 font-serif italic",
-            "hover:bg-yellow-400 hover:text-pink-600 hover:not-italic",
-            isActive ? "ring-4 ring-lime-600" : "",
-          ].join(" ")
-        }
-      >
-        PROFILE
-      </NavLink>
-    </nav>
+    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
+      <nav className="mx-auto flex h-14 max-w-4xl items-center gap-8 px-6">
+        <span className="font-heading text-sm font-semibold tracking-tight text-foreground">
+          <span className="text-muted-foreground">App Name</span>
+        </span>
+        <ul className="flex items-center gap-6">
+          {LINKS.map((l) => (
+            <li key={l.to}>
+              <NavLink
+                to={l.to}
+                end={l.end}
+                className={({ isActive }) =>
+                  cn(
+                    "text-sm font-medium transition-colors",
+                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+                  )
+                }
+              >
+                {l.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
   );
 }

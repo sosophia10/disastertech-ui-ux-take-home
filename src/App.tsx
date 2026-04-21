@@ -7,12 +7,14 @@ import Profile from "./pages/Profile";
 export default function App() {
   return (
     <BrowserRouter>
-      <AppNav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/records" element={<Records />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
+      <div className="min-h-screen bg-background text-foreground">
+        <AppNav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/records" element={<Records />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
