@@ -123,4 +123,4 @@ However, it remains closer to a structured UI pass than a fully scalable compone
 
 ## Final Note
 
-Forking was disabled on the source repository, so I submitted the work in a branch within my own copy of the repo.
+Forking was disabled on the original repository, so this submission was completed in a separate repository.
