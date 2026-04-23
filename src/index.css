@@ -5,6 +5,102 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Original starter files each set their own outer widths:
+Home used `max-w-4xl`, Records used `max-w-5xl`, and AppNav used `max-w-4xl`.
+Added `@utility app-shell` so all routes and the nav can share one consistent page shell. */
+@utility app-shell {
+  @apply mx-auto w-full max-w-5xl px-6;
+}
+
+/* Original updated pages repeated `app-shell py-12` on multiple routes.
+Added `page-shell` so route-level page spacing stays consistent and easier to extend. */
+@utility page-shell {
+  @apply app-shell py-12;
+}
+
+/* Original updated route headers repeated `space-y-2`.
+Added `page-header` so page-level header rhythm is defined in one place. */
+@utility page-header {
+  @apply space-y-2;
+}
+
+/* Original updated route headers repeated the same eyebrow styling across pages.
+Added `page-eyebrow` so small section labels share one consistent treatment. */
+@utility page-eyebrow {
+  @apply text-xs font-medium uppercase tracking-[0.2em] text-primary;
+}
+
+/* Original updated route headers repeated the same large title styling.
+Added `page-title` so major page headings stay visually consistent. */
+@utility page-title {
+  @apply font-heading text-3xl font-semibold tracking-tight text-foreground;
+}
+
+/* Original updated route headers repeated the same supporting description styling.
+Added `page-description` so top-level route copy uses one shared content pattern. */
+@utility page-description {
+  @apply max-w-2xl text-sm leading-relaxed text-muted-foreground;
+}
+
+/* Original updated Home sections repeated the same h2 styling.
+Added `section-title` so secondary section headings are easier to scale consistently. */
+@utility section-title {
+  @apply font-heading text-lg font-semibold tracking-tight text-foreground;
+}
+
+/* Original updated card sections repeatedly added `border-b` to CardHeader.
+Added `surface-header` so bordered section headers share one reusable utility. */
+@utility surface-header {
+  @apply border-b;
+}
+
+/* Original updated pages repeatedly used `text-sm leading-relaxed text-muted-foreground`
+for supporting body copy inside cards and list content.
+Added `supporting-copy` so secondary content text shares one readable pattern. */
+@utility supporting-copy {
+  @apply text-sm leading-relaxed text-muted-foreground;
+}
+
+/* Original updated form fields repeatedly used `grid gap-2` for label/control stacks.
+Extracted that pattern into `field-stack`, then increased it to `gap-3` so form
+groups breathe more cleanly and feel less crowded. */
+@utility field-stack {
+  @apply grid gap-3;
+}
+
+/* Original updated form helper lines repeatedly used `text-sm text-muted-foreground`.
+Extracted that pattern into `field-help`, then reduced it to `text-xs` with
+relaxed leading so helper copy sits more clearly below the main field content. */
+@utility field-help {
+  @apply text-xs leading-relaxed text-muted-foreground;
+}
+
+/* Original updated Records table headings repeatedly used
+`px-4 text-xs uppercase tracking-[0.16em] text-muted-foreground`.
+Added `table-heading` so data-table labels share one utility. */
+@utility table-heading {
+  @apply px-4 text-xs uppercase tracking-[0.16em] text-muted-foreground;
+}
+
+/* Original updated empty states repeatedly needed the same centered vertical stack.
+Added `empty-state` so recovery messaging can reuse one layout pattern. */
+@utility empty-state {
+  @apply flex flex-col items-center gap-3 text-center;
+}
+
+/* Original updated metric labels used the same compact uppercase treatment in Records.
+Added `metric-label` so small summary labels can share one semantic utility. */
+@utility metric-label {
+  @apply text-xs font-medium uppercase tracking-[0.16em];
+}
+
+/* Original updated Records summary cards set their large metric number with an
+inline `text-2xl` class. Added `metric-value` so key numeric readouts use one
+shared focal treatment instead of repeating raw sizing classes. */
+@utility metric-value {
+  @apply text-3xl leading-none font-semibold tracking-tight text-foreground;
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: "Geist Variable", sans-serif;

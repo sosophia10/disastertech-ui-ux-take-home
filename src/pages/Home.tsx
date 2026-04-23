@@ -46,15 +46,23 @@ const RUBRIC = [
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16 space-y-16">
-      <section className="space-y-4">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
-          UI / UX Engineer take-home
-        </p>
-        <h1 className="font-heading text-4xl font-semibold tracking-tight text-foreground">
-          Your assignment
-        </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
+    /* Original starter page used `mx-auto max-w-4xl px-6 py-16 space-y-16`.
+    First replaced it with `app-shell py-12 space-y-12`, then extracted the shared
+    route shell into `page-shell` so future pages can reuse the same outer layout more cleanly. */
+    <main className="page-shell space-y-12">
+      <section className="space-y-2">
+        {/* Original starter eyebrow already used these raw classes inline.
+            Replaced the repeated string with `page-eyebrow` so route labels stay consistent. */}
+        <p className="page-eyebrow">UI / UX Engineer take-home</p>
+        {/* Original starter title used `text-4xl`.
+            Reduced it to `text-3xl` so Home's route header scale matches Profile and Records
+            instead of feeling like a separate editorial page, then extracted that repeated
+            title styling into `page-title`. */}
+        <h1 className="page-title">Your assignment</h1>
+        {/* Original starter intro paragraph used `text-base`.
+            Reduced it to `text-sm`, then replaced the repeated class string with
+            `page-description` so route-level supporting copy has one shared pattern. */}
+        <p className="page-description">
           This is a modest exercise in applying a consistent design language across a small admin
           app. The main task is to apply Tailwind styles and shadcn/ui components to the{" "}
           <span className="text-foreground">Profile</span> page.
@@ -73,16 +81,20 @@ export default function Home() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-heading text-lg font-semibold tracking-tight text-foreground">
-          What you&apos;ll build
-        </h2>
+        {/* Original starter section heading used the full raw class string
+            `font-heading text-lg font-semibold tracking-tight text-foreground`.
+            Replaced that repeated heading pattern with `section-title`. */}
+        <h2 className="section-title">What you&apos;ll build</h2>
         <Card>
           <CardContent className="divide-y divide-border p-0">
             {BUILD_ITEMS.map((item) => (
               <div
                 key={item.route}
-                className="grid gap-2 px-5 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6"
+                className="grid gap-2 px-4 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6"
               >
+                {/* Original starter row padding here was `px-5`.
+                    Changed it to `px-4` so this card uses the same internal spacing as the
+                    shared Card component and the other updated pages. */}
                 <div className="font-mono text-sm text-foreground">{item.route}</div>
                 <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
               </div>
@@ -92,9 +104,10 @@ export default function Home() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-heading text-lg font-semibold tracking-tight text-foreground">
-          Ground rules
-        </h2>
+        {/* Original starter section heading used the full raw class string
+            `font-heading text-lg font-semibold tracking-tight text-foreground`.
+            Replaced that repeated heading pattern with `section-title`. */}
+        <h2 className="section-title">Ground rules</h2>
         <ul className="space-y-2.5">
           {RULES.map((rule, i) => (
             <li key={rule} className="flex gap-4 text-sm leading-relaxed text-muted-foreground">
@@ -109,18 +122,28 @@ export default function Home() {
 
       <section className="space-y-4">
         <div className="flex items-baseline justify-between gap-4">
-          <h2 className="font-heading text-lg font-semibold tracking-tight text-foreground">
-            Evaluation rubric
-          </h2>
+          {/* Original starter section heading used the full raw class string
+              `font-heading text-lg font-semibold tracking-tight text-foreground`.
+              Replaced that repeated heading pattern with `section-title`. */}
+          <h2 className="section-title">Evaluation rubric</h2>
           <span className="text-xs text-muted-foreground">Weights sum to 100%</span>
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           {RUBRIC.map((r) => (
-            <Card key={r.title}>
-              <CardHeader>
-                <Badge>{r.weight}</Badge>
+            <Card key={r.title} size="sm">
+              {/* Original starter rubric cards used a lighter open CardHeader.
+                  A later consistency pass added `border-b` here, but that made these
+                  informational cards look like table cells. Restored the open header
+                  treatment so the rubric reads lighter than the product surfaces. */}
+              <CardHeader className="gap-3">
+                {/* Original starter weight badge used the default filled Badge variant.
+                    Changed it to `outline` so the rubric weight reads as metadata instead of
+                    competing with primary actions and status badges. */}
+                <Badge variant="outline" className="w-fit">
+                  {r.weight}
+                </Badge>
                 <CardTitle className="pt-2 text-base">{r.title}</CardTitle>
-                <CardDescription className="leading-relaxed">{r.body}</CardDescription>
+                <CardDescription className="supporting-copy">{r.body}</CardDescription>
               </CardHeader>
             </Card>
           ))}
@@ -128,15 +151,19 @@ export default function Home() {
       </section>
 
       <section className="space-y-4 border-t border-border pt-10">
-        <h2 className="font-heading text-lg font-semibold tracking-tight text-foreground">
-          How to submit
-        </h2>
+        {/* Original starter section heading used the full raw class string
+            `font-heading text-lg font-semibold tracking-tight text-foreground`.
+            Replaced that repeated heading pattern with `section-title`. */}
+        <h2 className="section-title">How to submit</h2>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           When you&apos;re done, push to a branch, open a PR, include screenshots, and a short note
           covering what trade-offs you made and what is left do.
         </p>
         <div className="pt-2">
-          <Button asChild>
+          {/* Original starter CTA used the default Button size.
+              Increased it to `size="lg"` so the final page action feels more deliberate at
+              the end of the Home route. */}
+          <Button asChild size="lg">
             <Link to="/profile">Go to Profile</Link>
           </Button>
         </div>
